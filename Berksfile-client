@@ -6,4 +6,4 @@ def custom_cookbook(name, version='>= 0.0.0', options={})
   }.merge(options))
 end
 
-custom_cookbook 'custom_prometheus'
+custom_cookbook 'test_rack_app'

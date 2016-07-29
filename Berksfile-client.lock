@@ -1,0 +1,16 @@
+DEPENDENCIES
+  test_rack_app
+    path: cookbooks/test_rack_app
+
+GRAPH
+  ruby_build (1.0.0)
+    yum-epel (>= 0.0.0)
+  ruby_rbenv (1.1.0)
+    java (> 1.4.0)
+    ruby_build (>= 0.0.0)
+  test_rack_app (0.1.0)
+    ruby_build (~> 1.0.0)
+    ruby_rbenv (~> 1.1.0)
+  yum (3.11.0)
+  yum-epel (0.7.0)
+    yum (>= 3.6.3)
