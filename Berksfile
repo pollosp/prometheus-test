@@ -1,2 +1,10 @@
 source 'https://supermarket.chef.io'
-cookbook 'prometheus', '= 0.2.0'
+
+def custom_cookbook(name, version='>= 0.0.0', options={})
+  cookbook(name, version, {
+    path: "cookbooks/#{name}"
+  }.merge(options))
+end
+
+#cookbook 'prometheus'
+custom_cookbook 'custom_prometheus'

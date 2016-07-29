@@ -19,7 +19,8 @@ Vagrant.configure(2) do |config|
       chef.data_bags_path = 'data_bags'
       chef.nodes_path = 'nodes'
       chef.roles_path = 'roles'
-      chef.add_recipe 'prometheus'
+#      chef.add_recipe 'prometheus'
+      chef.add_recipe 'custom_prometheus'
     end
 
     prometheusserver.vm.provider 'virtualbox' do |vb|
@@ -29,7 +30,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.define 'prometheusclient' do |prometheusclient|
     config.berkshelf.enabled = true
-    config.berkshelf.berksfile_path = 'Berksfile'
     prometheusclient.vm.box = 'ARTACK/debian-jessie'
     prometheusclient.vm.box_url = 'https://atlas.hashicorp.com/ARTACK/boxes/debian-jessie'
     prometheusclient.vm.hostname = 'prometheus-client'
