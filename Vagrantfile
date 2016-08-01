@@ -64,13 +64,7 @@ Vagrant.configure(2) do |config|
       chef.data_bags_path = 'data_bags'
       chef.nodes_path = 'nodes'
       chef.roles_path = 'roles'
-      chef.add_recipe 'grafana'
-        chef.json = {
-      'custom_grafana' => {
-        'webserver' => '',
-        'version' => 'latest'
-      }
-    }
+      chef.add_recipe 'custom_grafana'
     end
     grafana.vm.provider 'virtualbox' do |vb|
       vb.memory = '512'
