@@ -19,7 +19,6 @@ Vagrant.configure(2) do |config|
       chef.data_bags_path = 'data_bags'
       chef.nodes_path = 'nodes'
       chef.roles_path = 'roles'
-#      chef.add_recipe 'prometheus'
       chef.add_recipe 'custom_prometheus'
     end
 
@@ -46,6 +45,34 @@ Vagrant.configure(2) do |config|
       chef.add_recipe 'test_rack_app'
     end
     prometheusclient.vm.provider 'virtualbox' do |vb|
+      vb.memory = '512'
+    end
+  end
+
+  config.vm.define 'grafana' do |grafana|
+    config.berkshelf.enabled = true
+    config.berkshelf.berksfile_path = 'Berksfile-grafana'
+    grafana.vm.box = 'ARTACK/debian-jessie'
+    grafana.vm.box_url = 'https://atlas.hashicorp.com/ARTACK/boxes/debian-jessie'
+    grafana.vm.hostname = 'prometheus-client'
+    grafana.vm.network 'private_network', ip: '192.168.50.4'
+    grafana.vm.network :forwarded_port, guest: 3000, host: 8081
+    grafana.vbguest.auto_update = false
+
+    grafana.vm.provision 'chef_zero' do |chef|
+      chef.cookbooks_path = 'cookbooks'
+      chef.data_bags_path = 'data_bags'
+      chef.nodes_path = 'nodes'
+      chef.roles_path = 'roles'
+      chef.add_recipe 'grafana'
+        chef.json = {
+      'custom_grafana' => {
+        'webserver' => '',
+        'version' => 'latest'
+      }
+    }
+    end
+    grafana.vm.provider 'virtualbox' do |vb|
       vb.memory = '512'
     end
   end
