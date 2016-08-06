@@ -3,11 +3,14 @@
 # Recipe:: default
 #
 
-include_recipe 'golang'
-
-ENV['GOPATH'] = '/opt/go/'
-
 include_recipe 'prometheus'
+
+template '/etc/init.d/prometheus' do
+  source 'prometheus.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+end
 
 prometheus_job 'rack-example' do
   scrape_interval   '15s'

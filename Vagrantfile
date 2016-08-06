@@ -4,7 +4,7 @@
 
 Vagrant.configure(2) do |config|
   config.berkshelf.enabled = true
-  config.berkshelf.berksfile_path = 'Berksfile'
+  config.berkshelf.berksfile_path = 'Berksfile-Server'
   config.vm.define 'prometheusserver' do |prometheusserver|
     prometheusserver.vm.box = 'ARTACK/debian-jessie'
     prometheusserver.vm.box_url = 'https://atlas.hashicorp.com/ARTACK/boxes/debian-jessie'

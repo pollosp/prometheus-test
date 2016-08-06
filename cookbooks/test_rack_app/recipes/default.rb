@@ -2,9 +2,10 @@
 # Cookbook Name:: custom_prometheus
 # Recipe:: default
 #
-include_recipe 'ruby_build'
+#include_recipe 'ruby_build'
 
-include_recipe 'ruby_rbenv::user'
+#include_recipe 'ruby_rbenv::user'
+package ['ruby','bundler','git']
 
 git '/home/vagrant/rack_app' do
   repository 'https://github.com/prometheus/client_ruby.git'
